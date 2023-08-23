@@ -149,7 +149,7 @@ local manifest =
         metadata: {
           annotations: obj.forEach(function(f,v) {
             ['%s-md5sum' % f]: std.md5(v)
-          }, config.ConfigMap)
+          }, std.get(config, 'ConfigMap', {}))
         } + { labels: config.labels },
         spec: {
           securityContext: controller.securityContext,
