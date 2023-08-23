@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2023 Simen Strange <https://github.com/dxlr8r/tanka_compose>
+SPDX-License-Identifier: MIT
+-->
 <!doctype html>
 <html lang="en">
 <head>

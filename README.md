@@ -1,6 +1,6 @@
 # Tanka Compose
 
-`Tanka Compose` is a project to provision Kubernetes application in a fast an easy way. `Tanka Compose` only require you do give it some input, like the container image you intend to use, etc. And it will take care of the rest.
+`Tanka Compose` is a project to provision Kubernetes applications in a fast an easy way. `Tanka Compose` only require you do give it some input, like the container image you intend to use, etc. And it will take care of the rest.
 
 The projects goal is to fit simpler deployments, to host a webpage in Apache, streaming services like Navidrome, hosting a WebDav server, etc.
 
