@@ -1,0 +1,6 @@
+imports:
+  dxsonnet: vendor/lib/dxsonnet
+
+git module dxsonnet:
+  url: https://github.com/dxlr8r/dxsonnet.git
+  export: lib
