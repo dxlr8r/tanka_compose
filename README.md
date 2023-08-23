@@ -6,7 +6,7 @@ The projects goal is to fit simpler deployments, to host a webpage in Apache, st
 
 Based on the simple configuration `Tanka Compose` will, on demand, provision: Deployment/Daemonset, Service, Ingress, PhysicalVolume, ConfigMap and a Secret, all tied together.
 
-While `Tanka Compose` will not fit all deployments, it uses `Tanka`, meaning you with some additional knowledge can tweak the chart to do things the maintainer never planed. Using patches and mixins you can alter a lot to tailor it further to your needs. See our [example.com](example/example.com/README.md) as an example of this.
+While `Tanka Compose` will not fit all deployments, it uses `Tanka`, meaning you with some additional knowledge can tweak the chart to do things the maintainer never planed. Using patches and mixins you can alter a lot to tailor it further to your needs. See our [example.com](example/example.com) as an example of this.
 
 ## Installing
 
