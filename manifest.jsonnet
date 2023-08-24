@@ -46,14 +46,9 @@ local manifest =
     apiVersion: 'networking.k8s.io/v1',
     kind: 'Ingress',
     metadata: {
-      // annotations: {
-      //   'haproxy-ingress.github.io/cert-signer': 'acme',
-      //   'kubernetes.io/tls-acme': 'true',
-      // },
       name: config.name,
     },
     spec: {
-      // ingressClassName: 'haproxy',
       rules: std.flattenArrays(
       [
         [
@@ -136,7 +131,9 @@ local manifest =
         ] for container in std.objectFields(controller.containers)]),
       selector: config.labels
     }
-  },
+  }
+  +
+  std.get(std.get(config, 'Service', {}), 'mixin', {}),
   [controller.kind]: {
     kind: controller.kind,
     apiVersion: 'apps/v1',
@@ -202,7 +199,7 @@ local manifest =
               imagePullPolicy: 'Always',
               ports:
               [{
-                  name: '%s-%s' % [container.key, port.key],
+                  name: std.substr('%s' % [port.key], 0, 15),
                   containerPort: lib.targetPort(port.value)
                 }
                 for port in std.uniq(std.objectKeysValues(
