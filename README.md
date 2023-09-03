@@ -32,7 +32,7 @@ Then setup the config file, using `full_config.jsonnet` as a template and refere
 Then provision the chart to your current kubectl context using `tk` (tanka):
 
 ```sh
-tk apply chart --tla-str context=$(kubectl config current-context) --tla-code config="$(cat config.jsonnet)"
+tk apply chart --tla-str context=$(kubectl config current-context) --tla-code config='import "config.jsonnet"'
 ```
 
 ### full_config.jsonnet
