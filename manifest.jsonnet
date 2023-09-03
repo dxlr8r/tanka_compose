@@ -120,14 +120,14 @@ local manifest =
       ports: std.flattenArrays([
         [
           {
-            name: '%s-%s' % [container, port.key],
+            name: str.rfc1123('%s-%s' % [container, port.key]),
             protocol: 'TCP',
             port: lib.svcPort(port.value),
             targetPort: lib.targetPort(port.value),
           } for port in std.uniq(std.objectKeysValues(
               std.get(
                 std.get(controller.containers, container, {}),
-                'ports', {})), function(x) x.value)
+                'ports', {})), function(x) lib.svcPort(x.value))
         ] for container in std.objectFields(controller.containers)]),
       selector: config.labels
     }
@@ -194,7 +194,7 @@ local manifest =
           ],
           containers: [
             {
-              name: container.key,
+              name: str.rfc1123(container.key),
               image: container.value.image,
               imagePullPolicy: 'Always',
               ports:
@@ -296,7 +296,7 @@ local manifest =
   }
 };
 
-obj.forEach(function(f,v) 
-if std.objectHas(v, 'apiVersion') then { 
-  [f]: v + { metadata+: { labels: config.labels } }
+obj.forEach(function(f,v) {
+  [f]: v + { metadata+: { labels+: config.labels }}
 }, manifest) // apply labels to all resources
+

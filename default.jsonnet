@@ -1,8 +1,7 @@
 # SPDX-FileCopyrightText: 2023 Simen Strange <https://github.com/dxlr8r/kube.acme.sh>
 # SPDX-License-Identifier: MIT
 
-{  
-  name: 'common',
+{
   namespace: $.name,
   labels: { app: $.name },
   Deployment: {

@@ -1,9 +1,9 @@
 # SPDX-FileCopyrightText: 2023 Simen Strange <https://github.com/dxlr8r/kube.acme.sh>
 # SPDX-License-Identifier: MIT
 
-local dxsonnet  = import 'vendor/lib/dxsonnet/main.libsonnet';
-
-{ dx: dxsonnet }
+{ 
+  dx: import 'vendor/lib/dxsonnet/main.libsonnet' 
+}
 +
 {
   targetPort(port)::

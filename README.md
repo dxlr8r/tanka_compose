@@ -34,3 +34,14 @@ Then provision the chart to your current kubectl context using `tk` (tanka):
 ```sh
 tk apply chart --tla-str context=$(kubectl config current-context) --tla-code config="$(cat config.jsonnet)"
 ```
+
+### full_config.jsonnet
+
+Unmodified using `full_config.jsonnet` will yield a working example as well, except for the Ingress as you probably do not own `example.com`.
+
+After deploying it, you can test the `nc` echo server it deployed:
+
+```
+kubectl -n tk-compose port-forward svc/tk-compose 8080:8080
+echo hallo world | nc localhost 8080
+```

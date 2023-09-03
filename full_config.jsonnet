@@ -3,9 +3,9 @@
   // Someplaces we use `+:` instead of `:` as a field separator. Unless you know what you are doing, don't change them in your config.
 
   // Required: will be used as a name for the resources, and used as a base inside the resources as well
-  name: 'common',
-  // Required: name of namespace to target, and create if not present
-  namespace: 'common',
+  name: 'tk-compose',
+  // Optional: name of namespace to target, and create if not present. If not specified will use value of `name`.
+  namespace: 'tk-compose',
   
   // optional: create a ConfigMap
   ConfigMap+: {
@@ -57,7 +57,7 @@
         subPathVolume: 'hello',
         // optional: defined container's ports
         ports: {
-          ingress: '80:8080', # recommended if Ingress and ingress is defined
+          ingress: '8080:8080', # recommended if Ingress and ingress is defined
           liveness: 8080 # optional, used as tcp livenessProbe 
         },
         // optional: define ingress for resource
