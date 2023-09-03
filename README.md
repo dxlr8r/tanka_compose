@@ -21,10 +21,9 @@ tkc_proj=my_project
 Then create your project and clone this repository:
 
 ```sh
-mkdir -p "$tkc_proj"
+git clone https://github.com/dxlr8r/tanka_compose.git "$tkc_proj"
 cd "$tkc_proj"
-git clone https://github.com/dxlr8r/tanka_compose.git chart
-cp chart/full_config.jsonnet config.jsonnet
+cp full_config.jsonnet config.jsonnet
 ```
 
 Then setup the config file, using `full_config.jsonnet` as a template and reference.
