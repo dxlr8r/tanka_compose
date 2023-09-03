@@ -296,6 +296,6 @@ local manifest =
   }
 };
 
-obj.forEach(function(f,v) {
+obj.forEach(function(f,v) if std.objectHas(v, 'apiVersion') then {
   [f]: v + { metadata+: { labels+: config.labels }}
 }, manifest) // apply labels to all resources
