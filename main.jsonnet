@@ -6,7 +6,7 @@ local mod      = import 'mod.jsonnet';
 local default  = import 'default.jsonnet';
 local manifest = import 'manifest.jsonnet';
 
-function(context='default', config={}, patch=function(m)m)
+function(context='default', config={}, patch=function(c,l,m)m)
 {
   config:: default + config + { context: context },
   apiVersion: 'tanka.dev/v1alpha1',
@@ -18,5 +18,5 @@ function(context='default', config={}, patch=function(m)m)
     namespace: $.config.namespace,
     contextNames: [ context ]
   },
-  data: (patch(manifest(lib, mod, $.config)))
+  data: (patch($.config, lib, manifest($.config, lib, mod)))
 }

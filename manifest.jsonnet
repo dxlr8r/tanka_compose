@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2023 Simen Strange <https://github.com/dxlr8r/kube.acme.sh>
 # SPDX-License-Identifier: MIT
 
-function(lib, mod, config)
+function(config, lib, mod)
 local obj = lib.dx.obj;
 local test = lib.dx.test;
 local ternary = test.ternary;
@@ -299,4 +299,4 @@ local manifest =
 obj.forEach(function(f,v) 
 if std.objectHas(v, 'apiVersion') then { 
   [f]: v + { metadata+: { labels: config.labels } }
-}, manifest) + { config:: config, lib:: lib } // apply labels to all resources
+}, manifest) // apply labels to all resources
