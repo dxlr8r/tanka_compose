@@ -299,4 +299,3 @@ local manifest =
 obj.forEach(function(f,v) {
   [f]: v + { metadata+: { labels+: config.labels }}
 }, manifest) // apply labels to all resources
-
