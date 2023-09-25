@@ -77,16 +77,16 @@ local manifest =
         if std.objectHas(container.value, 'ports') && 
            std.objectHas(container.value.ports, 'ingress')
         ]),
-      tls: [
+      tls: std.uniq([
         {
           hosts: std.get(container.value.ingress, 'alt', []) + 
                         [container.value.ingress.name],
           secretName: container.value.ingress.tls_secret,
         } for container in std.objectKeysValues(controller.containers)
           if std.objectHas(container.value, 'ingress') &&
-             std.objectHas(container.value.ingress, 'tls_secret')]
+             std.objectHas(container.value.ingress, 'tls_secret')])
     }
-  } 
+  }
   +
   std.get(std.get(config, 'Ingress', {}), 'mixin', {}),
 
