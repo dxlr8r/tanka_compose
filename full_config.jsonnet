@@ -49,8 +49,12 @@
         withSecret: ['mytoken'],
         // optional: mount ConfigMaps to this directory
         mountPathConfigMap: '/ConfigMap',
+        // optional: subPath for mountPathConfigMap
+        subPathConfigMap: 'config.yaml',
         // optional: mount Secrets to this directory
         mountPathSecret: '/Secret',
+        // optional: subPath for mountPathSecret
+        subPathSecret: 'token.yaml',
         // optional: mount claimed PhysicalVolume to this directory
         mountPathVolume: '/PersistentVolume',
         // optional: subPath for mountPathVolume

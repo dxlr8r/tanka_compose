@@ -234,7 +234,10 @@ local manifest =
                   name: str.rfc1123('configmap-%s-%s' % [config.name, vol.key]),
                   mountPath: 
                     '%s/%s' % [container.value.mountPathConfigMap, vol.key],
-                  subPath: vol.key,
+                  subPath: ternary(
+                    std.objectHas(container.value, 'subPathConfigMap'), 
+                    container.value.subPathConfigMap, 
+                    vol.key),
                 } for vol in std.objectKeysValues(
                     std.get(config, 'ConfigMap', {}))
                   if std.objectHas(container.value, 'mountPathConfigMap')
@@ -248,7 +251,10 @@ local manifest =
                   name: 'secret-%s-%s' % [config.name, vol.key],
                   mountPath: 
                     '%s/%s' % [container.value.mountPathSecret, vol.key],
-                  subPath: vol.key,
+                  subPath: ternary(
+                    std.objectHas(container.value, 'subPathSecret'), 
+                    container.value.subPathConfigMap, 
+                    vol.key),
                 } for vol in std.objectKeysValues(
                     std.get(config, 'Secret', {}))
                   if std.objectHas(container.value, 'mountPathSecret')
