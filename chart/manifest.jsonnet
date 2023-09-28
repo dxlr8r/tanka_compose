@@ -192,7 +192,8 @@ local manifest =
                 sizeLimit: config.EmptyDir.size_limit,
               }})
           ],
-          containers: [
+        } + obj.forEach(function(f, _) {
+          [f]: [
             {
               name: str.rfc1123(container.key),
               image: container.value.image,
@@ -289,9 +290,9 @@ local manifest =
             + 
             std.get(container.value, 'mixin', {})
             for container in std.objectKeysValues(
-              std.get(controller, 'containers', {}))
+              std.get(controller, f, {}))
           ]
-        }
+        }, { containers: null, initContainers: null }),
       }
     } 
     +
