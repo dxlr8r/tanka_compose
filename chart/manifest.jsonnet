@@ -179,21 +179,17 @@ local manifest =
             } for vol in std.objectKeysValues(std.get(config, 'Secret', {}))
           ]
           +
-          [
-            test.exists(config, 'Volume', {
-              name: 'pvc-%s' % config.name,
-              persistentVolumeClaim: {
-                claimName: config.name
-              }})
-          ]
+          test.exists(config, 'Volume', [{
+            name: 'pvc-%s' % config.name,
+            persistentVolumeClaim: {
+              claimName: config.name
+            }}])
           +
-          [
-            test.exists(config, 'EmptyDir', {
-              name: 'empty-dir-%s' % config.name,
-              emptyDir: {
-                sizeLimit: config.EmptyDir.size_limit,
-              }})
-          ],
+          test.exists(config, 'EmptyDir', [{
+            name: 'empty-dir-%s' % config.name,
+            emptyDir: {
+              sizeLimit: config.EmptyDir.size_limit,
+            }}]),
         } + obj.forEach(function(f, _) {
           [f]: [
             {
