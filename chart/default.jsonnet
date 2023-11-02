@@ -11,8 +11,9 @@
       runAsUser: 1000,
       runAsGroup: 1000,
       fsGroup: 2000 
-    },
+    }
   },
+  Daemonset: { securityContext: $.Deployment.securityContext },
   Volume: {
     accessModes: ['ReadWriteOnce'],
     size_request: '1Gi',

@@ -7,10 +7,12 @@ local test = lib.dx.test;
 local ternary = test.ternary;
 local str = lib.dx.string;
 local controller = 
-       if std.objectHas(config, 'Deployment') then 
-        std.get(config, 'Deployment') + {kind: 'Deployment'}
-  else if std.objectHas(config, 'Daemonset')  then 
-        std.get(config, 'Daemonset')  + {kind: 'Daemonset'}
+  if test.hasContent(
+    obj.getTraverse(config, ['Deployment', 'containers'])) then
+      std.get(config, 'Deployment') + {kind: 'Deployment'}
+  else if test.hasContent(
+    obj.getTraverse(config, ['Daemonset', 'containers'])) then
+      std.get(config, 'Daemonset')  + {kind: 'Daemonset'}
   else error '.Deployment or .Daemonset need to be defined';
 
 local manifest =
