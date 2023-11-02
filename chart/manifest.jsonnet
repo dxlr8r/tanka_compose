@@ -11,9 +11,9 @@ local controller =
     obj.getTraverse(config, ['Deployment', 'containers'])) then
       std.get(config, 'Deployment') + {kind: 'Deployment'}
   else if test.hasContent(
-    obj.getTraverse(config, ['Daemonset', 'containers'])) then
-      std.get(config, 'Daemonset')  + {kind: 'Daemonset'}
-  else error '.Deployment or .Daemonset need to be defined';
+    obj.getTraverse(config, ['DaemonSet', 'containers'])) then
+      std.get(config, 'DaemonSet')  + {kind: 'DaemonSet'}
+  else error '.Deployment or .DaemonSet need to be defined';
 
 local manifest =
 {
@@ -44,7 +44,7 @@ local manifest =
     }, config.Secret)
   }),
 
-  Ingress: {
+  Ingress: test.exists(config, 'Ingress', {
     apiVersion: 'networking.k8s.io/v1',
     kind: 'Ingress',
     metadata: {
@@ -90,7 +90,7 @@ local manifest =
     }
   }
   +
-  std.get(std.get(config, 'Ingress', {}), 'mixin', {}),
+  std.get(std.get(config, 'Ingress', {}), 'mixin', {})),
 
   PersistentVolumeClaim: test.exists(config, 'Volume', {
     apiVersion: 'v1',
@@ -111,7 +111,7 @@ local manifest =
       { storageClassName: config.Volume.storageClassName })
   }),
 
-  Service: {
+  Service: test.exists(config, 'Service', {
     kind: 'Service',
     apiVersion: 'v1',
     metadata: {
@@ -135,7 +135,7 @@ local manifest =
     }
   }
   +
-  std.get(std.get(config, 'Service', {}), 'mixin', {}),
+  std.get(std.get(config, 'Service', {}), 'mixin', {})),
   [controller.kind]: {
     kind: controller.kind,
     apiVersion: 'apps/v1',

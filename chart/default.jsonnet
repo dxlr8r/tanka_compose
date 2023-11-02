@@ -13,12 +13,12 @@
       fsGroup: 2000 
     }
   },
-  Daemonset: { securityContext: $.Deployment.securityContext },
-  Volume: {
+  DaemonSet: { securityContext: $.Deployment.securityContext },
+  Volume:: {
     accessModes: ['ReadWriteOnce'],
     size_request: '1Gi',
   },
-  EmptyDir: {
+  EmptyDir:: {
     size_limit: '10Mi'
   }
 }
