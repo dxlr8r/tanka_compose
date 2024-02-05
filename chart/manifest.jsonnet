@@ -299,6 +299,8 @@ local manifest =
       { replicas: controller.replicas },
       {})
   }
+  +
+  std.get(std.get(config, controller.kind, {}), 'mixin', {})
 };
 
 obj.forEach(function(f,v) if std.objectHas(v, 'apiVersion') then {
